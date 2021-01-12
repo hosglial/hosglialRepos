@@ -12,11 +12,6 @@ from dateutil import tz
 #     data1 = json.load(read_file)
 
 
-CLIENT_ID = 'excel-importer'
-# CLIENT_SECRET = 'SidkK73d'
-CLIENT_SECRET = 'dd9JsthOyfYD'
-# CLIENT_SECRET = data1['clientSecret']
-# CLIENT_ID = data1['clientId']
 
 
 
