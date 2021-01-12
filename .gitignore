@@ -21,3 +21,9 @@
 /testfile.log
 /WorkingLogin.py
 /.idea
+/build/
+/dist/
+/CsvParser/
+/ExcelTreeProcesser/
+/GlbConverter/
+/SvgParser/
