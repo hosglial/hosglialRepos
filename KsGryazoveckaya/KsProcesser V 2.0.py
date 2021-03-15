@@ -74,7 +74,7 @@ attrDict = functions.ParseExcel('dict', 'AttrList.xlsx', 3)
 
 df1 = pd.DataFrame(columns=attrSet)
 
-classes = functions.ParseExcel(type='dict', file='Классы.xlsx', sheet=1)
+classes = functions.ParseExcel(type='dict', file='Классы.xlsx', sheet=2)
 classGuid = functions.ParseExcel(type='dict', file='Классы.xlsx', sheet=0)
 
 
@@ -82,11 +82,11 @@ cyphers = functions.ParseExcel(type = 'dict',file='D:\\CNSSoft\\Report.xlsx',she
 
 
 def process(file):
-    # print(file)
+    print(file)
     xl = pd.ExcelFile(rawDir + file)
     df = xl.parse('MySheet')
     # df = pd.read_csv(rawDir + file,delimiter=';')
-    # print(df)
+    print(df)
     # дроп ненужных колонок с атрибутами
     for i in df.columns:
         if i not in attrSet:
@@ -98,7 +98,7 @@ def process(file):
 
 
 
-    for ind in df.index:
+    for ind in tqdm(df.index):
         # замена значений group и mesh
         try:
             name = df['ElementName'][ind]
@@ -141,7 +141,7 @@ def process(file):
                 "Диаметр трубопровода",
                 "Диаметр трубы"]
 
-    for ind in df.index:
+    for ind in tqdm(df.index):
         ModelFlag = False
         if df['IdTree'][ind] in list(df['IdTreeParent']):
             ModelFlag = True
@@ -218,7 +218,7 @@ def process(file):
     df.at[0, 'IdParentEntity'] = idParentEntity
     # сохранение
     df.to_excel(processedDir + 'processed' + file, index=False)
-    # df.to_excel(processedDir + 'processed' + '000_Decode_entitites_1.xlsx', index=False)
+    # df.to_excel(processedDir + 'processed' + 'Part5_Decode_entitites_1.xlsx', index=False)
 
     today = datetime.datetime.today()
     global eCount
@@ -239,7 +239,6 @@ if Process == True:
     print(time.time() - start)
 
 
-# process('Part5_Decode_entitites_1.csv')
 
 if Import == True:
     for i in functions.FileNames(folder=processedDir, type='xlsx'):
@@ -254,3 +253,4 @@ if Import == True:
                         logs.write(i + ';' + j[1])
         os.remove(importerFolder + 'importer.log')
 
+# process('Part1_Decode_entitites_21.xlsx')
